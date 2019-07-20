@@ -2,7 +2,7 @@ const Character = require('../../models/character')
 const Player = require('../../models/player')
 const Session = require('../../models/session')
 
-async function getCharactersForPlayerByName(discordId, characterName) {
+async function getCharacterForPlayerByName(discordId, characterName) {
   let player = await Player.findOne({discordUserName: discordId})
   console.log('player', player)
   if(player && player._id) {
