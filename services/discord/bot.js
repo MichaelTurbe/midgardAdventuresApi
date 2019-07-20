@@ -5,7 +5,8 @@ const prefix = '!midgard'
 const auth = require('./auth.json');
 const Discord = require('discord.js');
 const _ = require('lodash')
-const getCharactersForPlayer = require('../character/getCharactersForPlayer')
+const CharacterService = require('../character')
+//const getCharactersForPlayer = require('../character/getCharactersForPlayer')
 
 // Create an instance of a Discord client
 const client = new Discord.Client();
@@ -35,13 +36,30 @@ client.on('message', async message => {
   if (command === 'get my characters') {
     let userName = message.author.username + '#' + message.author.discriminator
     console.log(`request from user: ${userName}`)
-    let characters = await getCharactersForPlayer(userName)
+    let characters = await CharacterService.getCharactersForPlayer(userName)
     let embedDescription = getEmbedDescriptionForCharacters(characters)
 
     // message.channel.send(`Got ${characters.length} characters for that user`)
     const embed = new Discord.RichEmbed()
       // Set the title of the field
       .setTitle(`Here are the current characters for ${userName}:`)
+      // Set the color of the embed
+      .setColor(0xFF0000)
+      // Set the main content of the embed
+      .setDescription(embedDescription);
+    // Send the embed to the same channel as the message
+    message.channel.send(embed);
+  } else if (command === 'get my character') {
+    let userName = message.author.username + '#' + message.author.discriminator
+    let characterName = arguments[1]
+    console.log(`request from user: ${userName} to find character ${character}`)
+    let character = await CharacterService.getCharacterForPlayerByName(userName, character)
+    let embedDescription = getEmbedDescriptionForCharacter(character)
+
+    // message.channel.send(`Got ${characters.length} characters for that user`)
+    const embed = new Discord.RichEmbed()
+      // Set the title of the field
+      .setTitle(`Here is ${character.characterName}:`)
       // Set the color of the embed
       .setColor(0xFF0000)
       // Set the main content of the embed
@@ -92,6 +110,11 @@ function getEmbedDescriptionForCharacters(characters) {
   _.forEach(characters, character => {
     description += `\n\`${character.characterName} is a level ${character.level} ${character.race} ${character.class} with ${character.sessionPoints} session points.\``
   })
+  return description
+}
+
+function getEmbedDescriptionForCharacter(character) {
+  let description =  `\n\`${character.characterName} is a level ${character.level} ${character.race} ${character.class} with ${character.sessionPoints} session points.\``
   return description
 }
 
