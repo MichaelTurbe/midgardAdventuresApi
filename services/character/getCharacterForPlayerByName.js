@@ -12,4 +12,4 @@ async function getCharacterForPlayerByName(discordId, characterName) {
     return []
   }
 }
-module.exports = getCharactersForPlayer
+module.exports = getCharacterForPlayerByName
