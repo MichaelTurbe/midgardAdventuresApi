@@ -26,7 +26,7 @@ client.on('message', async message => {
     console.log('this message is not for me!')
     return  
   } 
-  const commandString = message.content.substring(9).toLowerCase()
+  const commandString = message.content.substring(9)
   console.log('command string', commandString)
   const arguments = commandString.split(':')
   console.log('arguments:', arguments)
@@ -51,7 +51,7 @@ client.on('message', async message => {
     message.channel.send(embed);
   } else if (command === 'get my character') {
     let userName = message.author.username + '#' + message.author.discriminator
-    let characterName = arguments[1]
+    let characterName = arguments[1].trim()
     console.log(`request from user: ${userName} to find character ${character}`)
     let character = await CharacterService.getCharacterForPlayerByName(userName, character)
     let embedDescription = getEmbedDescriptionForCharacter(character)
