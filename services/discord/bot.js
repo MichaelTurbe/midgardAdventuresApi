@@ -26,13 +26,14 @@ client.on('message', async message => {
     console.log('this message is not for me!')
     return  
   } 
-  const command = message.content.substring(9).toLowerCase()
+  const commandString = message.content.substring(9).toLowerCase()
+  console.log('command string', commandString)
+  const arguments = commandString.split(':')
+  console.log('arguments:', arguments)
+  const command = arguments[0]
   console.log('command', command)
   // If the message is "ping"
-  if (command === 'ping') {
-    // Send "pong" to the same channel
-    message.channel.send('pong');
-  } else if (command === 'get my characters') {
+  if (command === 'get my characters') {
     let userName = message.author.username + '#' + message.author.discriminator
     console.log(`request from user: ${userName}`)
     let characters = await getCharactersForPlayer(userName)
