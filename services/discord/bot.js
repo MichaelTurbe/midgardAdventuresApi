@@ -23,6 +23,7 @@ client.on('ready', () => {
 
 // Create an event listener for messages
 client.on('message', async message => {
+  console.log('channel name: ', message.channel.name)
   if (!message.content.startsWith(prefix) || message.author.bot) {
     console.log('this message is not for me!')
     return  
