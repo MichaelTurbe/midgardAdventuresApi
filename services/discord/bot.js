@@ -2,7 +2,6 @@ if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
   require('dotenv').config({path: 'env'})
 }
 const prefix = '!midgard'
-const auth = require('./auth.json');
 const Discord = require('discord.js');
 const _ = require('lodash')
 const CharacterService = require('../character')
@@ -49,27 +48,5 @@ client.on('message', async message => {
   }
 });
 
-// async function getCharactersForPlayer(discordUserName) {
-//   const apiKey = 'xe1ECd39qkexmm9JLK1r2A=='
-//   console.log(`apiKey: ${apiKey}`)
-//   let sourceOptions = {
-//     method: 'POST',
-//     // uri: `${targetAPI}/support/migrate/up`,
-//     uri: `http://localhost:3000/characters`,
-//     headers: {
-//         'User-Agent': 'Request-Promise',
-//         'Cache-Control': 'no-cache, no-store, must-revalidate',
-//         'Pragma': 'no-cache',
-//         'Authorization': apiKey
-//     },
-//     json: true, // Automatically parses the JSON string in the response
-//     body: {
-//       discordId: discordUserName
-//     }
-//   }
-//   let parsedBody = await requestPromise(sourceOptions)
-//   return parsedBody
-// }
-
 // Log our bot in using the token from https://discordapp.com/developers/applications/me
-client.login(auth.token);
+client.login(process.env.DISCORD_KEY);
