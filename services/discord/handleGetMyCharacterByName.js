@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const getEmbedDescriptionForCharacter = require('./getEmbedDescriptionForCharacter')
 const handleException = require('./handleException')
 
-async function handleGetMyCharacterByName (message) {
+async function handleGetMyCharacterByName (message, arguments) {
   try{
   let userName = message.author.username + '#' + message.author.discriminator
   let characterName = arguments[1].trim()

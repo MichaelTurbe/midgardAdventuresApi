@@ -39,7 +39,7 @@ client.on('message', async message => {
     if (command === 'get my characters') {
       handleGetMyCharacters(message)
     } else if (command === 'get my character') {
-      handleGetMyCharacterByName(message)
+      handleGetMyCharacterByName(message, arguements)
     }
     else {
       handleUnkownCommand(message)
