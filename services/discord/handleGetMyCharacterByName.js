@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const getEmbedDescriptionForCharacter = require('./getEmbedDescriptionForCharacter')
 const handleException = require('./handleException')
+const CharacterService = require('../character')
 
 async function handleGetMyCharacterByName (message, arguments) {
   try{

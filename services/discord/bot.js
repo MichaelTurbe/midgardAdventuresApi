@@ -71,18 +71,5 @@ client.on('message', async message => {
 //   return parsedBody
 // }
 
-function getEmbedDescriptionForCharacters(characters) {
-  let description = ''
-  _.forEach(characters, character => {
-    description += `\n\`${character.characterName} is a level ${character.level} ${character.race} ${character.class} with ${character.sessionPoints} session points.\``
-  })
-  return description
-}
-
-function getEmbedDescriptionForCharacter(character) {
-  let description =  `\n\`${character.characterName} is a level ${character.level} ${character.race} ${character.class} with ${character.sessionPoints} session points.\``
-  return description
-}
-
 // Log our bot in using the token from https://discordapp.com/developers/applications/me
 client.login(auth.token);
