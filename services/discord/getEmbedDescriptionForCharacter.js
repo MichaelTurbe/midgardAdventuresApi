@@ -2,10 +2,12 @@ function getEmbedDescriptionForCharacter(character) {
   let description = ''
   description += `\`
   Character Name:${character.characterName}
-  Race: ${race}
+  Race: ${character.race}
   Class: ${character.class}
   Level ${character.level}
-  Session Points: ${character.sessionPoints}\``
+  Session Points: ${character.sessionPoints}
+  Last Session: ${character.lastSessionPlayed.sessionName}
+  \``
   return description
 }
 
