@@ -20,8 +20,8 @@ async function handleGetMyCharacters (message) {
     .setDescription(embedDescription);
   // Send the embed to the same channel as the message
   message.channel.send(embed);
-  } catch(e) {
-    handleException(message, e)
+  } catch(ex) {
+    handleException(message, exx)
   }
 }
 

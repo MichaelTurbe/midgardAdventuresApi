@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-async function handleException (message, ) {
+async function handleException (message, e) {
   let userName = message.author.username
     console.log(`request from user: ${userName}`)
 
