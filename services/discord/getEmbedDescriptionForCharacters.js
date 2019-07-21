@@ -1,3 +1,4 @@
+const _ = require('lodash')
 function getEmbedDescriptionForCharacters(characters) {
   let description = ''
   _.forEach(characters, character => {
