@@ -45,7 +45,7 @@ client.on('message', async message => {
       handleUnkownCommand(message)
     }
   } catch(e) {
-    handleException(message)
+    handleException(message, e)
   }
 });
 
