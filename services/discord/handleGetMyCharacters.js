@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const getEmbedDescriptionForCharacters = require('./getEmbedDescriptionForCharacters')
+const CharacterService = require('../character')
 
 async function handleGetMyCharacters (message) {
   let userName = message.author.username + '#' + message.author.discriminator
