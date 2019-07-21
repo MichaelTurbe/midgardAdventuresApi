@@ -1,7 +1,9 @@
 const Discord = require('discord.js');
 const getEmbedDescriptionForCharacter = require('./getEmbedDescriptionForCharacter')
+const handleException = require('./handleException')
 
 async function handleGetMyCharacterByName (message) {
+  try{
   let userName = message.author.username + '#' + message.author.discriminator
   let characterName = arguments[1].trim()
   console.log(`request from user: ${userName} to find character ${characterName}`)
@@ -18,6 +20,11 @@ async function handleGetMyCharacterByName (message) {
       .setDescription(embedDescription);
     // Send the embed to the same channel as the message
     message.channel.send(embed);
+  }
+  catch(ex) {
+    console.log(ex)
+    handleException(message, ex)
+  }
 }
 
 module.exports = handleGetMyCharacterByName
