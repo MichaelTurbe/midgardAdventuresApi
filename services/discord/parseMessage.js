@@ -26,35 +26,37 @@ function parseMessage(message) {
     const command = parts[0]
     //update my character
     parsedMessage.command = command
-
-    let argumentsString = parts[1]
-    let arguments = argumentsString.split(',')
-    console.log('arguments:', arguments)
-    if(arguments.length > 0) {
-      let characterName = arguments[0].trim()
-      parsedMessage.characterName = characterName
-    }
-    // all of the rest of the arguments will be value setters
-    // turn them into an update object
-    if(arguments.length >= 1){
-      parsedMessage.updateObject = {}
-      arguments.shift()
-      let setterArguments = arguments
-      console.log('setterArguments:', setterArguments)
-      _.forEach(setterArguments, setter => {
-        let pieces = setter.split('=')
-        console.log('pieces:', pieces)
-        console.log('pieces length:', pieces.length)
-        
-        if(pieces.length == 2) {
-          let property = pieces[0].trim()
-          let value = pieces[1].trim()
-          parsedMessage.updateObject[property] = value
-        }
-      })
+    if(parts.length > 1) {
+      let argumentsString = parts[1]
+      let arguments = argumentsString.split(',')
+      console.log('arguments:', arguments)
+      if(arguments.length > 0) {
+        let characterName = arguments[0].trim()
+        parsedMessage.characterName = characterName
+      }
+      // all of the rest of the arguments will be value setters
+      // turn them into an update object
+      if(arguments.length >= 1){
+        parsedMessage.updateObject = {}
+        arguments.shift()
+        let setterArguments = arguments
+        console.log('setterArguments:', setterArguments)
+        _.forEach(setterArguments, setter => {
+          let pieces = setter.split('=')
+          console.log('pieces:', pieces)
+          console.log('pieces length:', pieces.length)
+          
+          if(pieces.length == 2) {
+            let property = pieces[0].trim()
+            let value = pieces[1].trim()
+            parsedMessage.updateObject[property] = value
+          }
+        })
+      }
     }
     return parsedMessage
   } catch(e) {
+    console.log(e)
     parsedMessage.broken = true
     return parsedMessage
   }

@@ -11,6 +11,7 @@ const handleUnkownCommand = require('./handleUnknownCommand')
 const handleException = require('./handleException')
 const parseMessage = require('./parseMessage')
 const handleUpdateMyCharacter = require('./handleUpdateMyCharacterByName')
+const handleHelpRequest = require('./handleHelpRequest')
 // Create an instance of a Discord client
 const client = new Discord.Client();
 
@@ -38,6 +39,9 @@ client.on('message', async message => {
       handleGetMyCharacterByName(message, parsedMessage)
     } else if (parsedMessage.command === 'update my character') {
       handleUpdateMyCharacter(message, parsedMessage)
+    } else if (parsedMessage.command === 'help') {
+      console.log('got a help request')
+      handleHelpRequest(message, parsedMessage)
     }
     else {
       handleUnkownCommand(message, parsedMessage)
