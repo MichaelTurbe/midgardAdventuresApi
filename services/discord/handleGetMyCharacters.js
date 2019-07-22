@@ -4,10 +4,9 @@ const handleException = require('./handleException')
 const CharacterService = require('../character')
 const _ = require('lodash')
 
-async function handleGetMyCharacters (message) {
+async function handleGetMyCharacters (message, parsedMessage) {
   try{
-  let userName = message.author.username + '#' + message.author.discriminator
-  console.log(`request from user: ${userName}`)
+  let userName = parsedMessage.userName
   let characters = await CharacterService.getCharactersForPlayer(userName)
   let embedDescription = getEmbedDescriptionForCharacters(characters)
 

@@ -2,13 +2,17 @@ const Discord = require('discord.js');
 const getEmbedDescriptionForCharacter = require('./getEmbedDescriptionForCharacter')
 const handleException = require('./handleException')
 const CharacterService = require('../character')
+const handleCharacterNotFound = require('./handleCharacterNotFound')
 
-async function handleGetMyCharacterByName (message, arguments) {
+async function handleGetMyCharacterByName (message, parsedMessage) {
   try{
-  let userName = message.author.username + '#' + message.author.discriminator
-  let characterName = arguments[1].trim()
+  let characterName = parsedMessage.characterName 
+  let userName = parsedMessage.userName
+  // let characterName = arguments[1].trim()
   console.log(`request from user: ${userName} to find character ${characterName}`)
-  let character = await CharacterService.getCharacterForPlayerByName(userName, characterName)
+  let character = await CharacterService.getCharacterForPlayerByName(parsedMessage.userName, characterName)
+  if(!character) { return handleCharacterNotFound(message, characterName)}
+  
   let embedDescription = getEmbedDescriptionForCharacter(character)
 
     // message.channel.send(`Got ${characters.length} characters for that user`)

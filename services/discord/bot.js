@@ -1,7 +1,7 @@
 if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
   require('dotenv').config({path: 'env'})
 }
-const prefix = '!midgard'
+
 const Discord = require('discord.js');
 const _ = require('lodash')
 const CharacterService = require('../character')
@@ -9,6 +9,8 @@ const handleGetMyCharacters = require('./handleGetMyCharacters')
 const handleGetMyCharacterByName = require('./handleGetMyCharacterByName')
 const handleUnkownCommand = require('./handleUnknownCommand')
 const handleException = require('./handleException')
+const parseMessage = require('./parseMessage')
+const handleUpdateMyCharacter = require('./handleUpdateMyCharacterByName')
 // Create an instance of a Discord client
 const client = new Discord.Client();
 
@@ -23,31 +25,25 @@ client.on('ready', () => {
 
 // Create an event listener for messages
 client.on('message', async message => {
-  if(message.channel.name !== 'character-tracker') {
-    console.log('wrong channel, move along', message.channel.name)
-    return
-  }
-  if (!message.content.startsWith(prefix) || message.author.bot) {
-    console.log('this message is not for me!')
-    return  
-  }
+
   try{
-    const commandString = message.content.substring(9)
-    console.log('command string', commandString)
-    const arguments = commandString.split(':')
-    console.log('arguments:', arguments)
-    const command = arguments[0]
-    console.log('command', command)
-    // If the message is "ping"
-    if (command === 'get my characters') {
-      handleGetMyCharacters(message)
-    } else if (command === 'get my character') {
-      handleGetMyCharacterByName(message, arguments)
+    let parsedMessage = parseMessage(message)
+    if(parsedMessage.ignore) { return }
+    console.log('parsed message', parsedMessage)
+    if (parseMessage.broken) {return handleUnkownCommand(message)}
+
+    if (parsedMessage.command === 'get my characters') {
+      handleGetMyCharacters(message, parsedMessage)
+    } else if (parsedMessage.command === 'get my character') {
+      handleGetMyCharacterByName(message, parsedMessage)
+    } else if (parsedMessage.command === 'update my character') {
+      handleUpdateMyCharacter(message, parsedMessage)
     }
     else {
-      handleUnkownCommand(message)
+      handleUnkownCommand(message, parsedMessage)
     }
   } catch(e) {
+    console.log(e)
     handleException(message, e)
   }
 });
