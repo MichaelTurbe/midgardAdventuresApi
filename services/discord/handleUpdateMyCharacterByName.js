@@ -22,7 +22,7 @@ async function handleUpdateMyCharacterByName (message, parsedMessage) {
     // message.channel.send(`Got ${characters.length} characters for that user`)
     const embed = new Discord.RichEmbed()
       // Set the title of the field
-      .setTitle(`${character.characterName} has been updated:}`)
+      .setTitle(`${character.characterName} has been updated:`)
       // Set the color of the embed
       .setColor(0xFF0000)
       // Set the main content of the embed
