@@ -13,6 +13,7 @@ async function handleUpdateMyCharacterByName (message, parsedMessage) {
   let character = await CharacterService.getCharacterForPlayerByName(userName, characterName)
   if(!character) { return handleCharacterNotFound(message, parsedMessage)}
   let updateQuery = convertUpdateMessageToQuery(message, parsedMessage)
+  console.log('this is the update query we got back from our function:', JSON.stringify(updateQuery, null, 2))
   if(!updateQuery) { return }
   let updatedCharacterName = characterName
   if(updateQuery.characterName) {
