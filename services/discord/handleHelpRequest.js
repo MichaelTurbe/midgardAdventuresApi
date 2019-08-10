@@ -14,7 +14,7 @@ async function handleHelpRequest (message, parsedMessage) {
   **level**',
   **class**,
   **race**,
-  **last session played**,
+  **last session name**,
   **last session date:**,
   **last city**
 

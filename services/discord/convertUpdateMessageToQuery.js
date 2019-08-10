@@ -8,7 +8,7 @@ function convertUpdateMessageToQuery(message, parsedMessage) {
     'level': 'level',
     'class': 'class',
     'race': 'race',
-    'last session played': 'lastSessionName',
+    'last session name': 'lastSessionName',
     'last session date:': 'lastSessionDate',
     'last city': 'lastCity'
   }
