@@ -6,9 +6,9 @@ function getEmbedDescriptionForCharacter(character) {
   Class: ${character.class}
   Level ${character.level}
   Session Points: ${character.sessionPoints}
-  Last Session: ${character.lastSessionPlayed.sessionName}
-  Date: ${character.lastSessionPlayed.date}
-  City: ${character.lastSessionPlayed.city}
+  Last Session: ${character.lastSessionName}
+  Date: ${character.lastSessionDate}
+  City: ${character.lastCity}
   \``
   return description
 }

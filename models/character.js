@@ -7,16 +7,16 @@ const CharacterSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Player'
   },
-  lastSessionPlayed: {
-    type: Schema.Types.ObjectId,
-    ref: 'Session'
-  },
   characterName: String,
   race: String,
   class: String,
   level: String,
   sessionPoints: Number,
-  status: Number
+  status: Number,
+  lastSessionName: String,
+  lastSessionDate: String,
+  lastCity: String,
+  system: String
 })
 
 CharacterSchema.index({player: 1, characterName: 1}, {unique: true})

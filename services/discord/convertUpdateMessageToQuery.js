@@ -3,14 +3,21 @@ const handleUnkownUpdateProperty = require('./handleUnkownUpdateProperty')
 
 function convertUpdateMessageToQuery(message, parsedMessage) {
   let converterObject = {
-    'session points': 'sessionPoints'
+    'session points': 'sessionPoints',
+    'name': 'characterName',
+    'level': 'level',
+    'class': 'class',
+    'race': 'race',
+    'last session played': 'lastSessionName',
+    'last session date:': 'lastSessionDate',
+    'last city': 'lastCity'
   }
   let updateObject = {}
   let properties = Object.keys(parsedMessage.updateObject)
   let bork = false
   _.forEach(properties, property => {
-    if(converterObject.hasOwnProperty(property)) {
-      let newProperty = converterObject[property]
+    if(converterObject.hasOwnProperty(property.toLowerCase())) {
+      let newProperty = converterObject[property.toLowerCase()]
       updateObject[newProperty] = parsedMessage.updateObject[property]
     } else {
       bork = true

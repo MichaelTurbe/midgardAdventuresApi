@@ -14,15 +14,19 @@ async function handleUpdateMyCharacterByName (message, parsedMessage) {
   if(!character) { return handleCharacterNotFound(message, parsedMessage)}
   let updateQuery = convertUpdateMessageToQuery(message, parsedMessage)
   if(!updateQuery) { return }
+  let updatedCharacterName = characterName
+  if(updateQuery.characterName) {
+    updatedCharacterName = updateQuery.characterName
+  }
   let result = await CharacterService.updateCharacterWithQuery(character, updateQuery)
-  let updatedCharacter =  await CharacterService.getCharacterForPlayerByName(userName, characterName)
+  let updatedCharacter =  await CharacterService.getCharacterForPlayerByName(userName, updatedCharacterName)
 
   let embedDescription = getEmbedDescriptionForCharacter(updatedCharacter)
 
     // message.channel.send(`Got ${characters.length} characters for that user`)
     const embed = new Discord.RichEmbed()
       // Set the title of the field
-      .setTitle(`${character.characterName} has been updated:`)
+      .setTitle(`${updatedCharacter.characterName} has been updated:`)
       // Set the color of the embed
       .setColor(0xFF0000)
       // Set the main content of the embed
