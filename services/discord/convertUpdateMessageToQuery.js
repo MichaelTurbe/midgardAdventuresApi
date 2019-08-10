@@ -17,7 +17,9 @@ function convertUpdateMessageToQuery(message, parsedMessage) {
   let bork = false
   _.forEach(properties, property => {
     if(converterObject.hasOwnProperty(property.toLowerCase())) {
+      console.log(`yes, the converter object has a property for ${property.toLowerCase()}`)
       let newProperty = converterObject[property.toLowerCase()]
+      console.log(`got ${newProperty} for requested property ${property.toLowerCase()}`)
       updateObject[newProperty] = parsedMessage.updateObject[property]
     } else {
       bork = true
