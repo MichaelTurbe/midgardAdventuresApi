@@ -11,11 +11,11 @@ async function handleHelpRequest (message, parsedMessage) {
   **!midgard update my character: Your Character Name , propertyName = value, property name = value** - This command will update any number of properties on your character.  The properties available to you are:
   **session points**,
   **name**,
-  **level**',
+  **level**,
   **class**,
   **race**,
   **last session name**,
-  **last session date:**,
+  **last session date**,
   **last city**
 
   **!midgard create my character: Your Character Name** - This command will create a new character for you with the specified name.  You can also set any number of properties on your character.  The method and properties available to you are the same as for updating a character.
