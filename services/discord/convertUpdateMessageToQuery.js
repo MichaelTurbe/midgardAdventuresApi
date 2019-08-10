@@ -9,7 +9,7 @@ function convertUpdateMessageToQuery(message, parsedMessage) {
     'class': 'class',
     'race': 'race',
     'last session name': 'lastSessionName',
-    'last session date:': 'lastSessionDate',
+    'last session date': 'lastSessionDate',
     'last city': 'lastCity'
   }
   let updateObject = {}
